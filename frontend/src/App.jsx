@@ -1,15 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import AddPage from "./pages/AddPage.jsx";
+import AllRecipesPage from "./pages/AllRecipesPage.jsx"
+import FavouritesPage from "./pages/FavouritesPage.jsx"
+// import './App.css'
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </>
+    <div class="bg-amber-50 h-screen">
+      {<Navbar />}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/add" element={<AddPage />} />
+        <Route path="/all" element={<AllRecipesPage />} />
+        <Route path="/favourites" element={<FavouritesPage />} />
+      </Routes>
+    </div>
   )
 }
 
