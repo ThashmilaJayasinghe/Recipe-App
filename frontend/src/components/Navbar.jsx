@@ -31,7 +31,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-lime-600/75">
+    <header className="bg-lime-600">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">            
@@ -40,7 +40,7 @@ export default function Navbar() {
               src={recipe}
               className="inline h-8 w-auto"
             />
-            <span className="text-lg ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
+            <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -54,25 +54,25 @@ export default function Navbar() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="/add" className="text-sm/6 font-semibold text-amber-100">
+          <a href="/add" className="text-lg font-semibold text-amber-100">
             Add Recipe
           </a>
-          <a href="/all" className="text-sm/6 font-semibold text-amber-100">
+          <a href="/all" className="text-lg font-semibold text-amber-100">
             All Recipes
           </a>
-          <a href="/favourites" className="text-sm/6 font-semibold text-amber-100">
+          <a href="/favourites" className="text-lg font-semibold text-amber-100">
             Favourites
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700 hover:bg-lime-800 py-0.5 px-4">
+          <a href="/login" className="text-lg font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700/65 hover:bg-lime-700 py-1 px-6">
             Log in
           </a>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-10" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-lime-600/75 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-lime-600 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">              
               <img
@@ -80,7 +80,7 @@ export default function Navbar() {
                 src={recipe}
                 className="inline h-8 w-auto"
               />
-              <span className="text-lg ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
+              <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
             </a>
             <button
               type="button"
@@ -96,27 +96,27 @@ export default function Navbar() {
               <div className="space-y-2 py-6">              
                 <a
                   href="/add"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-amber-100 hover:bg-lime-500/75"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
                 >
                   Add Recipe
                 </a>
                 <a
                   href="/all"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-amber-100 hover:bg-lime-500/75"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
                 >
                   All Recipes
                 </a>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-amber-100 hover:bg-lime-500/75"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
                 >
                   Favourites
                 </a>
               </div>
               <div className="py-6">
                 <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-amber-100 hover:bg-lime-500/75"
+                  href="/login"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
                 >
                   Log in
                 </a>

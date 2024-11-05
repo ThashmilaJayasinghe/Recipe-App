@@ -2,8 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import AddPage from "./pages/AddPage.jsx";
-import AllRecipesPage from "./pages/AllRecipesPage.jsx"
-import FavouritesPage from "./pages/FavouritesPage.jsx"
+import AllRecipesPage from "./pages/AllRecipesPage.jsx";
+import FavouritesPage from "./pages/FavouritesPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 // import './App.css'
 
 const recipes = [
@@ -31,13 +33,15 @@ const recipes = [
 function App() {
   return (
     // <div class="bg-amber-50 h-screen">
-    <div class="bg-amber-50 pb-10">
+    <div class="bg-amber-50 pb-10 min-h-screen">
       {<Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<AddPage />} />
         <Route path="/all" element={<AllRecipesPage recipes={recipes} />} />
         <Route path="/favourites" element={<FavouritesPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </div>
   )
