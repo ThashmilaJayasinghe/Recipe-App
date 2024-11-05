@@ -8,7 +8,8 @@ import FavouritesPage from "./pages/FavouritesPage.jsx"
 
 function App() {
   return (
-    <div class="bg-amber-50 h-screen">
+    // <div class="bg-amber-50 h-screen">
+    <div class="bg-amber-50 pb-10">
       {<Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />

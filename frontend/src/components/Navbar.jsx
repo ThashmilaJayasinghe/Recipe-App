@@ -25,7 +25,7 @@ const callsToAction = [
   { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
   { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
-import recipe from "../assets/recipe1.svg";
+import recipe from "../assets/recipe.svg";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -65,7 +65,7 @@ export default function Navbar() {
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700 py-0.5 px-4">
+          <a href="#" className="text-sm/6 font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700 hover:bg-lime-800 py-0.5 px-4">
             Log in
           </a>
         </div>
