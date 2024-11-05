@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
-const tags = ["All", "Breakfast", "Lunch", "Dinner", "Snack", "Favourite"]
+const tags = ["All", "Breakfast", "Lunch", "Dinner", "Snack"]
 
 export default function AllRecipesPage({ recipes }) {
   const [selected, setSelected] = useState(tags[0]);
@@ -48,7 +48,7 @@ export default function AllRecipesPage({ recipes }) {
       <div className="p-10 flex flex-wrap justify-center align-center gap-5">     
 
         {/* card */}
-        <div className="bg-lime-100 rounded-md w-96 p-8">
+        <div className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
           <h3 className="text-2xl font-semibold  text-stone-700">Pizza</h3>
           
           <img 
@@ -75,7 +75,7 @@ export default function AllRecipesPage({ recipes }) {
             </ol>
           </div>
 
-          <div className="mt-7 flex gap-0.5"> 
+          <div className="mt-7 flex gap-1.5">
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">snack</p>
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">dinner</p>
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">lunch</p>
@@ -85,7 +85,7 @@ export default function AllRecipesPage({ recipes }) {
         </div>
 
         {/* card */}
-        <div className="bg-lime-100 rounded-md w-96 p-8">
+        <div className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
           <h3 className="text-2xl font-semibold  text-stone-700">Pizza</h3>
           
           <img 
@@ -112,7 +112,7 @@ export default function AllRecipesPage({ recipes }) {
             </ol>
           </div>
 
-          <div className="mt-7 flex gap-0.5"> 
+          <div className="mt-7 flex gap-1.5"> 
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">snack</p>
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">dinner</p>
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">lunch</p>
@@ -123,7 +123,7 @@ export default function AllRecipesPage({ recipes }) {
         
 
         {/* card */}
-        <div className="bg-lime-100 rounded-md w-96 p-8">
+        <div className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
           <h3 className="text-2xl font-semibold  text-stone-700">Pizza</h3>
           
           <img 
@@ -150,7 +150,7 @@ export default function AllRecipesPage({ recipes }) {
             </ol>
           </div>
 
-          <div className="mt-7 flex gap-0.5"> 
+          <div className="mt-7 flex gap-1.5"> 
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">snack</p>
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">dinner</p>
             <p className="bg-lime-500 px-1 rounded text-amber-100 text-center">lunch</p>
@@ -160,7 +160,6 @@ export default function AllRecipesPage({ recipes }) {
         </div>
 
       </div>
-    </>
-    
+    </>    
   );
 }
