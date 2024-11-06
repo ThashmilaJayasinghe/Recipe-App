@@ -1,13 +1,11 @@
 import { XMarkIcon, HeartIcon } from '@heroicons/react/24/solid'
 
-
-
-export default function AddPage() {
+export default function UpdatePage() {
    
   return (
     <form className="w-10/12 max-w-2xl bg-lime-200 mx-auto mt-10 p-8 rounded-lg">
       <div className="space-y-12">   
-        <h2 className="text-2xl font-semibold text-stone-700">Add New Recipe</h2>
+        <h2 className="text-2xl font-semibold text-stone-700">Update Recipe</h2>
         
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
