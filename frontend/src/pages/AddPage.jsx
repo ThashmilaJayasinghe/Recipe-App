@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { XMarkIcon, HeartIcon } from '@heroicons/react/24/solid'
 
 let nextId = 4;
@@ -6,17 +7,37 @@ let nextId = 4;
 export default function AddPage({ onAddRecipe }) {
   const [newRecipe, setNewRecipe] = useState(
     {
-    id: 0,
+    id: nextId++,
     title: "",
     image: "",
-    ingredients: [''],
-    instructions: [''],
-    tags: ['']
+    ingredients: [],
+    instructions: [],
+    tags: []
     }
   );
 
-  const [tempInstructions, setTempInstructions] = useState('');  
+  const [ingredients, setIngredients] = useState(['']);
+  const [tempInstructions, setTempInstructions] = useState(''); 
+  
+  const navigate = useNavigate();
 
+  function handleAddIngredient()  {
+    setIngredients([...ingredients, '']);
+  }
+
+  function handleRemoveIngredient(index) {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(updatedIngredients);
+    setNewRecipe({ ...newRecipe, ingredients: updatedIngredients });
+  }
+
+  function handleIngredientChange(value, index) {
+    const updatedIngredients = ingredients.map((ingredient, i) =>
+      i === index ? value : ingredient
+    );
+    setIngredients(updatedIngredients);
+    setNewRecipe({ ...newRecipe, ingredients: updatedIngredients });
+  }
   
   function handleUpdateInstructions() {
     
@@ -83,66 +104,21 @@ export default function AddPage({ onAddRecipe }) {
                
           {ingredients.map((ingredient, index) => {
             return (
-              <div key={index} id="ingredients" className="flex mt-7">
-                <div className="w-3/5">
-                  <label htmlFor="name" className="text-sm/6 font-medium text-stone-700">
-                    Name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required                      
-                      autoComplete="name"
-                      className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
-                    />
-                  </div>
-                </div>
-
-                <div className="w-1/5">
-                  <label htmlFor="quantity" className="block text-sm/6 font-medium text-stone-700">
-                    Quantity
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="quantity"
-                      name="quantity"
-                      type="number"
-                      min="0"                     
-                      autoComplete="quantity"
-                      className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
-                    />
-                  </div>
-                </div>
-
-                <div className="w-1/5">
-                  <label htmlFor="unit" className="block text-sm/6 font-medium text-stone-700">
-                    Unit
-                  </label>
-                  <div className="mt-2">
-                    <select
-                      id="unit"
-                      name="unit"                      
-                      autoComplete="unit"
-                      className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:max-w-xs sm:text-sm/6"
-                    >
-                      <option>n/a</option>
-                      <option>g</option>
-                      <option>kg</option>
-                      <option>cups</option>
-                      <option>ml</option>
-                      <option>l</option>
-                      <option>tbsp</option>
-                      <option>tsp</option>
-                      <option>oz</option>
-                      <option>no's</option>                  
-                    </select>
-                  </div>
-                </div>    
+              <div key={index} id="ingredients" className="flex justify-between items-center mt-2">
+                <div className="w-full">
+                  <input 
+                    type="text"
+                    required
+                    value={ingredient}
+                    onChange={e => handleIngredientChange(e.target.value, index)}
+                    className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
+                  />
+                </div>            
+    
                 <button
                   type="button"
-                  className="mt-8 py-1.5 px-1.5 max-w-auto max-h-8 rounded-md text-sm font-semibold text-red-500 shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400"
+                  onClick={() => handleRemoveIngredient(index)}
+                  className="py-1.5 px-1.5 max-w-auto max-h-8 rounded-md text-sm font-semibold text-red-500 shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400"
                 >
                   <XMarkIcon aria-hidden="true" className="mx-auto my-auto h-5 w-auto text-red-500" />
                 </button> 
@@ -152,12 +128,10 @@ export default function AddPage({ onAddRecipe }) {
 
           <button
             type="button"
-            onClick={() => {
-              console.log("ingredient test");              
-            }}
+            onClick={handleAddIngredient}
             className="mt-10 col-span-2 rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
           >
-            Add Ingredient
+            Add another ingredient
           </button>
         </div>
 
@@ -295,8 +269,10 @@ export default function AddPage({ onAddRecipe }) {
         </button>
         <button
           type="button"
-          onClick={() => {            
+          onClick={() => {           
+            onAddRecipe(newRecipe)
             console.log(newRecipe)
+            navigate('/all');
           }}
           className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
         >
