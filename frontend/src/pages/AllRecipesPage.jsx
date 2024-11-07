@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
 
@@ -11,6 +12,11 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
   const [recipeId, setRecipeId] = useState(0);
 
+  const navigate = useNavigate();
+
+  function handleUpdateRecipe(recipe) {
+    navigate('/update', { state: {recipe} });
+  }
   
   function handleDeleteRecipe(recipeId) {    
     onDeleteRecipe(recipeId);    
@@ -86,9 +92,12 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
                   </div>
 
                   <div className="mt-7 flex gap-1.5">                                      
-                    <a href="/update" className="bg-lime-500 p-2 rounded text-amber-100 text-center">            
+                    <button 
+                      onClick={() => handleUpdateRecipe(recipe)}
+                      className="bg-lime-500 p-2 rounded text-amber-100 text-center"
+                    >            
                      <PencilSquareIcon aria-hidden="true" className="h-5 w-5 text-amber-100" />
-                    </a>
+                    </button>
                     <button
                       onClick={() => {
                         setRecipeId(recipe.id)

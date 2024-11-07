@@ -47,6 +47,16 @@ function App() {
     ]);
   }
 
+  function handleUpdateRecipe(updatedRecipe) {
+    setRecipes(recipes.map(recipe => {
+      if(recipe.id === updatedRecipe.id) {
+        return updatedRecipe
+      } else {
+        return recipe
+      }
+    }))
+  }
+
   function handleDeleteRecipe(recipeId) {
     setRecipes(recipes.filter(recipe => recipe.id !== recipeId));
   }
@@ -58,7 +68,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<AddPage onAddRecipe={handleAddRecipe} />} />
-        <Route path="/update" element={<UpdatePage />} />
+        <Route path="/update" element={<UpdatePage onUpdateRecipe={handleUpdateRecipe} />} />
         <Route path="/all" element={<AllRecipesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} />} />
         <Route path="/favourites" element={<FavouritesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} />} />
         <Route path="/login" element={<LoginPage />} />
