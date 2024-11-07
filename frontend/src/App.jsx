@@ -17,21 +17,21 @@ const initialRecipes = [
     id: 1,
     title: "Pizza",
     image: "https://i.imgur.com/LqbtHvk.jpeg",
-    ingredients: ["500g flour", "200g cheese", "pinch of salt"],
+    ingredients: ["flour - 500g", "cheese - 200g", "pinch of salt"],
     instructions: ["Make the dough and leave it to rest.", "Flatten dough and add toppings.", "Bake at 350 C for 50 minutes."],
     tags: ["snack", "dinner", "lunch", "favourite"]
   }, {
     id: 2,
     title: "Pasta",
     image: "https://i.imgur.com/KUnPk39.jpeg",
-    ingredients: ["500g flour", "200g cheese", "pinch of salt"],
+    ingredients: ["flour - 500g", "cheese - 200g", "pinch of salt"],
     instructions: ["Make the dough and leave it to rest.", "Flatten dough and add toppings.", "Bake at 350 C for 50 minutes."],
     tags: ["dinner", "lunch"]
   }, {
     id: 3,
     title: "Avacado Toast",
     image: "https://i.imgur.com/n9xN26C.jpeg",
-    ingredients: ["500g flour", "200g cheese", "pinch of salt"],
+    ingredients: ["flour - 500g", "cheese - 200g", "pinch of salt"],
     instructions: ["Make the dough and leave it to rest.", "Flatten dough and add toppings.", "Bake at 350 C for 50 minutes."],
     tags: ["breakfast", "favourite"]
   }
@@ -39,6 +39,13 @@ const initialRecipes = [
 
 function App() {
   const [recipes, setRecipes] = useState(initialRecipes);
+
+  function handleAddRecipe(newRecipe) {
+    setRecipes([
+      ...recipes,
+      {...newRecipe}
+    ]);
+  }
 
   function handleDeleteRecipe(recipeId) {
     setRecipes(recipes.filter(recipe => recipe.id !== recipeId));
@@ -50,10 +57,10 @@ function App() {
       {<Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/add" element={<AddPage />} />
+        <Route path="/add" element={<AddPage onAddRecipe={handleAddRecipe} />} />
         <Route path="/update" element={<UpdatePage />} />
         <Route path="/all" element={<AllRecipesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} />} />
-        <Route path="/favourites" element={<FavouritesPage />} />
+        <Route path="/favourites" element={<FavouritesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
