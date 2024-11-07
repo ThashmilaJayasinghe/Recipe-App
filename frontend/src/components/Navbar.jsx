@@ -38,7 +38,7 @@ export default function Navbar() {
             <img
               alt="recipe book"
               src={recipe}
-              className="inline h-8 w-auto"
+              className="inline h-10 w-auto"
             />
             <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
           </a>

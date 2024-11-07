@@ -9,30 +9,24 @@ export default function AddPage({ onAddRecipe }) {
     id: 0,
     title: "",
     image: "",
-    ingredients: [],
-    instructions: ["boil water"],
-    tags: []
+    ingredients: [''],
+    instructions: [''],
+    tags: ['']
     }
   );
 
-  const [tempIngredient, setTempIngredient] = useState('');
-  const [ingredients, setIngredients] = useState(['']);
+  const [tempInstructions, setTempInstructions] = useState('');  
 
-  const [tempInstructions, setTempInstructions] = useState('');
-  const [instructions, setInstructions] = useState(['']);
+  
+  function handleUpdateInstructions() {
+    
+    const instructionsArray = tempInstructions.split('\n');
 
-  const handleUpdateIngredients = () => {
     setNewRecipe({
       ...newRecipe,
-      ingredients: [...newRecipe.ingredients, tempIngredient],
+      instructions: instructionsArray
     });
-  };
 
-  const handleUpdateInstructions = () => {
-    setNewRecipe({
-      ...newRecipe,
-      instructions: [...newRecipe.instructions, tempInstructions],
-    });
   };
    
   return (
@@ -44,7 +38,7 @@ export default function AddPage({ onAddRecipe }) {
 
           <div className="sm:col-span-full">
             <label htmlFor="title" className="block text-base font-medium text-stone-700">
-              Recipe Title*
+              Recipe Title
             </label>
             <div className="mt-2">
               <input
@@ -62,7 +56,7 @@ export default function AddPage({ onAddRecipe }) {
           
           <div className="sm:col-span-full">
             <label htmlFor="image" className="block text-base font-medium text-stone-700">
-              Image URL*
+              Image URL
             </label>
             <div className="mt-2">
               <input
@@ -79,33 +73,34 @@ export default function AddPage({ onAddRecipe }) {
           </div>        
         </div>
 
+        <hr className="border border-lime-300" />
+
         {/* ingredients section */}
         <div>
           <label htmlFor="ingredients" className="block text-base font-medium text-stone-700 mb-2">
-              Ingredients*
+              Ingredients
           </label>   
                
           {ingredients.map((ingredient, index) => {
             return (
-              <div key={index} id="ingredients">
-                <div className="w-1/2 inline border border-indigo-400">
+              <div key={index} id="ingredients" className="flex mt-7">
+                <div className="w-3/5">
                   <label htmlFor="name" className="text-sm/6 font-medium text-stone-700">
-                    Name*
+                    Name
                   </label>
                   <div className="mt-2">
                     <input
                       id="name"
                       name="name"
                       type="text"
-                      required
-                      onChange={e => setTempIngredient(e.target.value)}
+                      required                      
                       autoComplete="name"
-                      className="rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
+                      className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
                     />
                   </div>
                 </div>
 
-                <div className="w-1/4 border border-indigo-400">
+                <div className="w-1/5">
                   <label htmlFor="quantity" className="block text-sm/6 font-medium text-stone-700">
                     Quantity
                   </label>
@@ -114,25 +109,23 @@ export default function AddPage({ onAddRecipe }) {
                       id="quantity"
                       name="quantity"
                       type="number"
-                      min="0"
-                      onChange={e => setTempIngredient(tempIngredient + " - " + e.target.value)}
+                      min="0"                     
                       autoComplete="quantity"
-                      className="block w-full rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
+                      className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
                     />
                   </div>
                 </div>
 
-                <div className="w-1/4 border border-indigo-400">
+                <div className="w-1/5">
                   <label htmlFor="unit" className="block text-sm/6 font-medium text-stone-700">
                     Unit
                   </label>
                   <div className="mt-2">
                     <select
                       id="unit"
-                      name="unit"
-                      onChange={e => setTempIngredient(tempIngredient + e.target.value)}
+                      name="unit"                      
                       autoComplete="unit"
-                      className="block w-full rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:max-w-xs sm:text-sm/6"
+                      className="block w-11/12 rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:max-w-xs sm:text-sm/6"
                     >
                       <option>n/a</option>
                       <option>g</option>
@@ -149,9 +142,9 @@ export default function AddPage({ onAddRecipe }) {
                 </div>    
                 <button
                   type="button"
-                  className="mt-8 p-0 max-w-8 max-h-8 rounded-md bg-lime-600 border border-lime-600 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
+                  className="mt-8 py-1.5 px-1.5 max-w-auto max-h-8 rounded-md text-sm font-semibold text-red-500 shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400"
                 >
-                  <XMarkIcon aria-hidden="true" className="mx-auto my-auto h-5 w-5 text-amber-100" />
+                  <XMarkIcon aria-hidden="true" className="mx-auto my-auto h-5 w-auto text-red-500" />
                 </button> 
               </div>
             )
@@ -160,47 +153,49 @@ export default function AddPage({ onAddRecipe }) {
           <button
             type="button"
             onClick={() => {
-              handleUpdateIngredients();
-              setIngredients([...ingredients, ""])
+              console.log("ingredient test");              
             }}
-            className="mt-4 col-span-2 rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
+            className="mt-10 col-span-2 rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
           >
             Add Ingredient
           </button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setInstructions([...instructions, ""])}
-          className="mt-6 col-span-2 rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
-        >
-          Add Instruction
-        </button>
+        <hr className="border border-lime-300" />
 
-        <div className="col-span-full">         
-          {instructions.map((instruction, index) => {
-            return (
-              <div key={index} className="mt-2">
-                <textarea
-                  id="instructions"
-                  name="instructions"
-                  required
-                  rows={2}
-                  className="block w-full rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
-                  defaultValue={''}              
-                  onChange={(e) => setTempInstructions(e.target.value)}
-                  onBlur={handleUpdateInstructions} // Triggers when the user leaves the textarea
-                />
-              </div> 
-            );
-          })}             
+        {/* Instructions Section */}
+        <div>
+        <label htmlFor="instruction-section" className="-mt-4 pb-6 text-base font-medium text-stone-700">
+          Instructions
+        </label> 
+        <p className="text-sm/6 text-stone-700">
+          Enter each instruction on a separate line (press <span className="font-semibold">Enter</span> after each step)
+        </p>
         </div>
+        <div id="instruction-section" className="inline">         
+          <div className="mt-4 flex items-center justify-between">
+            <textarea
+              id="instructions"
+              name="instructions"
+              required
+              rows={5}
+              cols={80}
+              className="rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
+              defaultValue={''}              
+              onChange={(e) => setTempInstructions(e.target.value)}
+              onBlur={handleUpdateInstructions} // triggers when user leaves the textarea
+            />                
+          </div>            
+        </div>
+        
 
-        <div className="mt-8 space-y-10">
+        <hr className="border border-lime-300" />
+
+        <div className="mt-6 space-y-10">
           <fieldset>
-            <legend className="text-sm/6 font-semibold text-stone-700">Add tags</legend>
-            <p className="mt-1 text-sm/6 text-gray-600">
-              Add tags to more easy identify your recipes
+            <legend className="text-base font-semibold text-stone-700">Add tags</legend>
+            <p className="mt-1 text-sm/6 text-stone-700">
+              Organize your recipes with tags!
             </p>
             <div className="mt-6 space-y-6">
               <div className="relative flex gap-x-3">
@@ -300,10 +295,8 @@ export default function AddPage({ onAddRecipe }) {
         </button>
         <button
           type="button"
-          onClick={() => {      
-            handleUpdateIngredients();                
+          onClick={() => {            
             console.log(newRecipe)
-            console.log(tempIngredient)
           }}
           className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
         >
