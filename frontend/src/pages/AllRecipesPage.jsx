@@ -5,7 +5,7 @@ import { CheckIcon, ChevronUpDownIcon, PencilSquareIcon, TrashIcon } from '@hero
 
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal.jsx";
 
-const filterTags = ["All", "Breakfast", "Lunch", "Dinner", "Snack"]
+const filterTags = ["All", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack"]
 
 export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
   const [selected, setSelected] = useState(filterTags[0]);  
@@ -14,8 +14,8 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
 
   const navigate = useNavigate();
 
-  function handleUpdateRecipe(recipe) {
-    navigate('/update', { state: {recipe} });
+  function handleUpdateRecipe(recipe, all = true) {
+    navigate('/update', { state: {recipe, all} });
   }
   
   function handleDeleteRecipe(recipeId) {    
@@ -68,7 +68,7 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
           for(const tag of recipe.tags) {
             if(tag === selected.toLowerCase() || selected === "All") {
               return (
-                <div key={recipe.id} className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
+                <div key={recipe._id} className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
                   <h3 className="text-2xl font-semibold  text-stone-700">{recipe.title}</h3>
                   
                   <img 
@@ -100,7 +100,7 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
                     </button>
                     <button
                       onClick={() => {
-                        setRecipeId(recipe.id)
+                        setRecipeId(recipe._id)
                         setIsDeleteModalOpen(true)
                       }}
                       className="bg-red-500 p-2 rounded text-amber-100 text-center"

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { XMarkIcon, HeartIcon } from '@heroicons/react/24/solid'
 
-let nextId = 4;
+let nextId = 5;
 
 export default function AddPage({ onAddRecipe }) {
   const [newRecipe, setNewRecipe] = useState(
@@ -227,6 +227,23 @@ export default function AddPage({ onAddRecipe }) {
               <div className="relative flex gap-x-3">
                 <div className="flex h-6 items-center">
                   <input
+                    id="dessert"
+                    name="dessert"
+                    type="checkbox"
+                    value="dessert"
+                    onChange={e => setNewRecipe({...newRecipe, tags: [...newRecipe.tags, e.target.value]})}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-lime-600"
+                  />
+                </div>
+                <div className="text-sm/6">
+                  <label htmlFor="dessert" className="font-medium text-stone-700">
+                    Dessert
+                  </label>
+                </div>
+              </div>
+              <div className="relative flex gap-x-3">
+                <div className="flex h-6 items-center">
+                  <input
                     id="snack"
                     name="snack"
                     type="checkbox"
@@ -265,7 +282,11 @@ export default function AddPage({ onAddRecipe }) {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm/6 font-semibold text-stone-700">
+        <button 
+          type="button" 
+          onClick={() => navigate('/all')}
+          className="text-sm/6 font-semibold text-stone-700"
+        >
           Cancel
         </button>
         <button

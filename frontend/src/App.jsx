@@ -11,7 +11,7 @@ import FavouritesPage from "./pages/FavouritesPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 
-import { fetchRecipes, addRecipe } from "./recipeService.js";
+import { fetchRecipes, addRecipe, updateRecipe, deleteRecipe } from "./recipeService.js";
 
 
 const initialRecipes = [
@@ -36,40 +36,57 @@ const initialRecipes = [
     ingredients: ["flour - 500g", "cheese - 200g", "pinch of salt"],
     instructions: ["Make the dough and leave it to rest.", "Flatten dough and add toppings.", "Bake at 350 C for 50 minutes."],
     tags: ["breakfast", "favourite"]
+  },{
+    id: 4,
+    title: "Chocolate Cake",
+    image: "https://i.imgur.com/Wxwiimg.jpeg",
+    ingredients: ["flour - 500g", "chocolate - 200g", "pinch of salt"],
+    instructions: ["Make the dough and leave it to rest.", "Flatten dough and add toppings.", "Bake at 350 C for 50 minutes."],
+    tags: ["dessert", "favourite"]
   }
 ];
 
 function App() {
-  const [recipes, setRecipes] = useState(initialRecipes);
+  const [recipes, setRecipes] = useState([]);
 
-  // useEffect(() => {
-  //   fetchRecipes()
-  //     .then(data => setRecipes(data))
-  //     .catch(error => console.log(error))
-  // }, []);
+  useEffect(() => {
+    fetchRecipes()
+      .then(data => setRecipes(data))
+      .catch(error => console.log(error))
+  }, []);
 
 
   function handleAddRecipe(newRecipe) {
     addRecipe(newRecipe)
       .then(data => setRecipes([
         ...recipes,
-        {...newRecipe}
+        {...data}
       ]))
       .catch(error => console.log(error));
   }
 
   function handleUpdateRecipe(updatedRecipe) {
-    setRecipes(recipes.map(recipe => {
-      if(recipe.id === updatedRecipe.id) {
-        return updatedRecipe
-      } else {
-        return recipe
-      }
-    }))
+    updateRecipe(updatedRecipe._id, updatedRecipe)
+      .then(data => {
+        setRecipes(recipes.map(recipe => {
+          if(recipe._id === data._id) {
+            return data
+          } else {
+            return recipe
+          }
+        }))
+      })
+      .catch(error => console.log(error));
   }
 
   function handleDeleteRecipe(recipeId) {
-    setRecipes(recipes.filter(recipe => recipe.id !== recipeId));
+    deleteRecipe(recipeId)
+    .then(success => {
+      if(success) {
+        setRecipes(recipes.filter(recipe => recipe._id !== recipeId));
+      }
+    })
+    .catch(error => console.log(error));  
   }
 
   return (

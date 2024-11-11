@@ -6,7 +6,7 @@ import { XMarkIcon, HeartIcon } from '@heroicons/react/24/solid'
 export default function UpdatePage({ onUpdateRecipe }) {  
    
   const location = useLocation();
-  const { recipe } = location.state;
+  const { recipe, all } = location.state;
 
   const [updatedRecipe, setUpdatedRecipe] = useState(recipe);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
@@ -239,6 +239,24 @@ export default function UpdatePage({ onUpdateRecipe }) {
               <div className="relative flex gap-x-3">
                 <div className="flex h-6 items-center">
                   <input
+                    id="dessert"
+                    name="dessert"
+                    type="checkbox"
+                    value="dessert"
+                    checked={updatedRecipe.tags.includes("dessert")}
+                    onChange={handleCheckbox}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-lime-600"
+                  />
+                </div>
+                <div className="text-sm/6">
+                  <label htmlFor="dessert" className="font-medium text-stone-700">
+                    Dessert
+                  </label>
+                </div>
+              </div>
+              <div className="relative flex gap-x-3">
+                <div className="flex h-6 items-center">
+                  <input
                     id="snack"
                     name="snack"
                     type="checkbox"
@@ -279,15 +297,28 @@ export default function UpdatePage({ onUpdateRecipe }) {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm/6 font-semibold text-stone-700">
+        <button 
+          type="button" 
+          onClick={() => {
+            if(all) {
+              navigate('/all')
+            } else {
+              navigate('/favourites')
+            }
+          }}
+          className="text-sm/6 font-semibold text-stone-700"
+        >
           Cancel
         </button>
         <button
           type="button"
           onClick={() => {           
             onUpdateRecipe(updatedRecipe)
-            console.log(updatedRecipe)
-            navigate('/all');
+            if(all) {
+              navigate('/all')
+            } else {
+              navigate('/favourites')
+            }
           }}
           className="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
         >

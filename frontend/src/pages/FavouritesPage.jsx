@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
 
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal.jsx";
 
-const filterTags = ["All", "Breakfast", "Lunch", "Dinner", "Snack"]
+const filterTags = ["All", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack"]
 
-export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
-  const [favourites, setFavourites] = useState(recipes.filter(recipe => recipe.tags.includes("favourite")));
+export default function FavouritesPage({ recipes, onDeleteRecipe }) {
+  const [favourites, setFavourites] = useState([]);
   const [selected, setSelected] = useState(filterTags[0]);  
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
   const [recipeId, setRecipeId] = useState(0);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setFavourites(recipes.filter(recipe => recipe.tags.includes("favourite")));
+  }, [recipes]);
+
+  function handleUpdateRecipe(recipe, all = false) {
+    navigate('/update', { state: {recipe, all} });
+  }
   
   function handleDeleteRecipe(recipeId) {    
     onDeleteRecipe(recipeId); 
@@ -65,7 +75,7 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
           for(const tag of recipe.tags) {
             if(tag === selected.toLowerCase() || selected === "All") {
               return (
-                <div key={recipe.id} className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
+                <div key={recipe._id} className="bg-lime-100 rounded-md w-96 max-w-96 p-8">
                   <h3 className="text-2xl font-semibold  text-stone-700">{recipe.title}</h3>
                   
                   <img 
@@ -89,12 +99,15 @@ export default function AllRecipesPage({ recipes, onDeleteRecipe }) {
                   </div>
 
                   <div className="mt-7 flex gap-1.5">                                      
-                    <a href="/update" className="bg-lime-500 p-2 rounded text-amber-100 text-center">            
+                    <button 
+                      onClick={() => handleUpdateRecipe(recipe)}
+                      className="bg-lime-500 p-2 rounded text-amber-100 text-center"
+                    >            
                      <PencilSquareIcon aria-hidden="true" className="h-5 w-5 text-amber-100" />
-                    </a>
+                    </button>
                     <button
                       onClick={() => {
-                        setRecipeId(recipe.id)
+                        setRecipeId(recipe._id)
                         setIsDeleteModalOpen(true)
                       }}
                       className="bg-red-500 p-2 rounded text-amber-100 text-center"
