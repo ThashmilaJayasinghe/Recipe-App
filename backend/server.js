@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); // middleware that allows the acceptance of JSON in request body
 
-// app.use(cors());
+app.use(cors());
 
-app.use(cors({
-  origin: 'http://localhost:5173/',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5173/',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type'],
+// }));
 
 app.use("/api/recipes", recipeRoutes);
 

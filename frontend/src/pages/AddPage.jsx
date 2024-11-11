@@ -51,7 +51,8 @@ export default function AddPage({ onAddRecipe }) {
   };
    
   return (
-    <form className="w-10/12 max-w-2xl bg-lime-200 mx-auto mt-10 p-8 rounded-lg">
+    <div className="bg-amber-50 min-h-screen flex items-center justify-center">
+    <form className="w-10/12 max-w-2xl bg-lime-200 mx-auto my-10 p-8 rounded-lg">
       <div className="space-y-12">   
         <h2 className="text-2xl font-semibold text-stone-700">Add New Recipe</h2>
         
@@ -280,5 +281,6 @@ export default function AddPage({ onAddRecipe }) {
         </button>
       </div>
     </form>
+    </div>
   )
 }

@@ -12,7 +12,7 @@ export default function SignupPage() {
         <div className="mt-4 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-6">
 
           <div className="sm:col-span-full mx-5">
-            <label htmlFor="title" className="block text-sm/6 font-medium text-stone-700">
+            <label htmlFor="title" className="block text-base font-medium text-stone-700">
               Username
             </label>
             <div className="mt-2">
@@ -29,7 +29,7 @@ export default function SignupPage() {
           </div>
           
           <div className="sm:col-span-full mx-5">
-            <label htmlFor="email" className="block text-sm/6 font-medium text-stone-700">
+            <label htmlFor="email" className="block text-base font-medium text-stone-700">
               Email address
             </label>
             <div className="mt-2">
@@ -46,7 +46,7 @@ export default function SignupPage() {
           </div>
 
           <div className="sm:col-span-full mx-5">
-            <label htmlFor="password" className="block text-sm/6 font-medium text-stone-700">
+            <label htmlFor="password" className="block text-base font-medium text-stone-700">
               Password
             </label>
             <div className="mt-2">

@@ -25,13 +25,14 @@ const callsToAction = [
   { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
   { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
-import recipe from "../assets/recipe.svg";
+// import recipe from "../assets/recipe.svg";
+import recipe from "/recipeNav.svg";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-lime-600">
+    <header className="bg-lime-600 h-24">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">            
@@ -40,7 +41,7 @@ export default function Navbar() {
               src={recipe}
               className="inline h-10 w-auto"
             />
-            <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
+            <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">RecipeHaven</span>
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -80,7 +81,7 @@ export default function Navbar() {
                 src={recipe}
                 className="inline h-8 w-auto"
               />
-              <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">My Recipes</span>
+              <span className="text-3xl ml-1 inline-block align-middle font-semibold text-amber-50">RecipeHaven</span>
             </a>
             <button
               type="button"

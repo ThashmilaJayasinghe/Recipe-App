@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import axios from 'axios';
+
 import Navbar from "./components/Navbar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import AddPage from "./pages/AddPage.jsx";
@@ -9,8 +11,8 @@ import FavouritesPage from "./pages/FavouritesPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 
-// import ConfirmDeleteModal from "./components/ConfirmDeleteModal.jsx";
-// import './App.css'
+import { fetchRecipes, addRecipe } from "./recipeService.js";
+
 
 const initialRecipes = [
   {
@@ -40,11 +42,20 @@ const initialRecipes = [
 function App() {
   const [recipes, setRecipes] = useState(initialRecipes);
 
+  // useEffect(() => {
+  //   fetchRecipes()
+  //     .then(data => setRecipes(data))
+  //     .catch(error => console.log(error))
+  // }, []);
+
+
   function handleAddRecipe(newRecipe) {
-    setRecipes([
-      ...recipes,
-      {...newRecipe}
-    ]);
+    addRecipe(newRecipe)
+      .then(data => setRecipes([
+        ...recipes,
+        {...newRecipe}
+      ]))
+      .catch(error => console.log(error));
   }
 
   function handleUpdateRecipe(updatedRecipe) {
@@ -63,7 +74,7 @@ function App() {
 
   return (
     // <div className="bg-amber-50 h-screen">
-    <div className="bg-amber-50 pb-10 min-h-screen">
+    <div className="bg-amber-50 min-h-screen">
       {<Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
