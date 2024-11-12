@@ -51,11 +51,15 @@ export default function LoginPage() {
       <div className="mt-16 flex items-center justify-center gap-x-6">        
         <button
           type="submit"
-          className="rounded-md bg-lime-600 px-24 py-3 text-lg font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
+          className="rounded-md bg-lime-600 px-24 py-3 mb-3 text-lg font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
         >
           Submit
         </button>
       </div>
+      <hr className="border border-lime-300" />
+      <p className="mt-2 text-sm text-lime-600 text-center">
+        Don't have an account? <a href="/signup" className="text-lime-600 hover:underline hover:text-lime-800">Sign Up</a>
+      </p>
     </form>
   )
 }

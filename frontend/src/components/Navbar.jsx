@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
   DialogPanel,
@@ -21,15 +22,20 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-]
-// import recipe from "../assets/recipe.svg";
+import { logout } from "../services/AuthService.js";
 import recipe from "/recipeNav.svg";
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!localStorage.getItem('token');
+
+  function handleLogout() {
+    logout();
+    navigate('/');
+  };
 
   return (
     <header className="bg-lime-600 h-24">
@@ -66,9 +72,18 @@ export default function Navbar() {
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/login" className="text-lg font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700/65 hover:bg-lime-700 py-1 px-6">
-            Log in
-          </a>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="text-lg font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700/65 hover:bg-lime-700 py-1 px-6"
+            >
+              Log out
+            </button>
+          ) : (
+            <a href="/login" className="text-lg font-semibold text-amber-100 border border-lime-700 rounded bg-lime-700/65 hover:bg-lime-700 py-1 px-6">
+              Log in
+            </a>
+          )}
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -115,12 +130,21 @@ export default function Navbar() {
                 </a>
               </div>
               <div className="py-6">
-                <a
-                  href="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
-                >
-                  Log in
-                </a>
+                {isLoggedIn ? (
+                  <button
+                    onClick={handleLogout}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
+                  >
+                    Log out
+                  </button>
+                ) : (
+                  <a
+                    href="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-lg font-semibold text-amber-100 hover:bg-lime-500/75"
+                  >
+                    Log in
+                  </a>
+                )}
               </div>
             </div>
           </div>
