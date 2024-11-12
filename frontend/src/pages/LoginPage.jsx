@@ -1,8 +1,22 @@
-import { XMarkIcon, HeartIcon } from '@heroicons/react/24/solid'
-
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../services/AuthService.js";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate();
+
+  async function handleLogin() {    
+    const result = await login(email, password);
+    if (!result.success) {
+      setError(result.message);
+      return;
+    }
+    navigate('/all');
+  }
    
   return (
     <form className="w-5/12 max-w-xl bg-lime-200 mx-auto mt-20 p-8 rounded-lg">
@@ -20,6 +34,8 @@ export default function LoginPage() {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="Enter Your Email"
                 autoComplete="email"
@@ -37,6 +53,8 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 required
                 placeholder="Enter Your Password"
                 autoComplete="password"
@@ -48,9 +66,11 @@ export default function LoginPage() {
         </div>
               
       </div>
+      {error && <p className="text-red-600 text-center mt-4">{error}</p>}
       <div className="mt-16 flex items-center justify-center gap-x-6">        
         <button
-          type="submit"
+          type="button"
+          onClick={handleLogin}
           className="rounded-md bg-lime-600 px-24 py-3 mb-3 text-lg font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
         >
           Submit

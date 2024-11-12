@@ -1,8 +1,16 @@
-import { XMarkIcon, HeartIcon } from '@heroicons/react/24/solid'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
+import {  } from "module";
 
 export default function SignupPage() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSignup() {
+
+  }
    
   return (
     <form className="w-5/12 max-w-xl bg-lime-200 mx-auto mt-12 p-8 rounded-lg">
@@ -12,17 +20,18 @@ export default function SignupPage() {
         <div className="mt-4 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-6">
 
           <div className="sm:col-span-full mx-5">
-            <label htmlFor="title" className="block text-base font-medium text-stone-700">
+            <label htmlFor="username" className="block text-base font-medium text-stone-700">
               Username
             </label>
             <div className="mt-2">
               <input
-                id="title"
-                name="title"
+                id="username"
+                name="username"
                 type="text"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
                 required
                 placeholder="Enter Your Username"
-                autoComplete="title"
                 className="block w-full rounded-md border-0 py-1.5 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm/6"
               />
             </div>
@@ -37,6 +46,8 @@ export default function SignupPage() {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="Enter Your Email"
                 autoComplete="email"
@@ -54,6 +65,8 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 required
                 placeholder="Enter Your Password"
                 autoComplete="password"
