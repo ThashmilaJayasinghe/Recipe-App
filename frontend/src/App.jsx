@@ -11,6 +11,8 @@ import FavouritesPage from "./pages/FavouritesPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 
+import ProtectedRoute from "./ProtectedRoute.jsx"
+
 import { fetchRecipes, addRecipe, updateRecipe, deleteRecipe } from "./services/RecipeService.js";
 
 
@@ -90,16 +92,15 @@ function App() {
     .catch(error => console.log(error));  
   }
 
-  return (
-    // <div className="bg-amber-50 h-screen">
+  return (    
     <div className="bg-amber-50 min-h-screen">
       {<Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/add" element={<AddPage onAddRecipe={handleAddRecipe} />} />
-        <Route path="/update" element={<UpdatePage onUpdateRecipe={handleUpdateRecipe} />} />
-        <Route path="/all" element={<AllRecipesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} />} />
-        <Route path="/favourites" element={<FavouritesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} />} />
+        <Route path="/add" element={<ProtectedRoute><AddPage onAddRecipe={handleAddRecipe} /></ProtectedRoute>} />
+        <Route path="/update" element={<ProtectedRoute><UpdatePage onUpdateRecipe={handleUpdateRecipe} /></ProtectedRoute>} />
+        <Route path="/all" element={<ProtectedRoute><AllRecipesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} /></ProtectedRoute>} />
+        <Route path="/favourites" element={<ProtectedRoute><FavouritesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} /></ProtectedRoute>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
