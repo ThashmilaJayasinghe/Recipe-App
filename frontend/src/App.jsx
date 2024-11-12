@@ -11,7 +11,7 @@ import FavouritesPage from "./pages/FavouritesPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 
-import { fetchRecipes, addRecipe, updateRecipe, deleteRecipe } from "./recipeService.js";
+import { fetchRecipes, addRecipe, updateRecipe, deleteRecipe } from "./services/RecipeService.js";
 
 
 const initialRecipes = [
