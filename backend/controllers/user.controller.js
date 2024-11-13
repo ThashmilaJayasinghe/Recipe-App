@@ -13,6 +13,11 @@ export const registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: 'A user with this email already exists' });
     }
+
+    // Check if password length is sufficient
+    if(password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters' });
+    }
     
     const user = new User({ username, email, password });
     await user.save();
