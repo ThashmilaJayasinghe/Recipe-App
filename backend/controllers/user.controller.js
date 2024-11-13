@@ -7,9 +7,16 @@ import User from "../models/user.model.js";
 export const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'A user with this email already exists' });
+    }
+    
     const user = new User({ username, email, password });
     await user.save();
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User registered successfully!' });
   } catch (error) {
     console.error(`Error in registering user: ${error.message}`);
     res.status(500).json({ error: 'Registration failed' }); 

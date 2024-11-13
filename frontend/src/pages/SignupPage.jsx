@@ -1,15 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import {  } from "module";
+import { register } from "../services/AuthService.js";
 
 export default function SignupPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  function handleSignup() {
+  const navigate = useNavigate();
+  
 
+  async function handleSignup() {
+    setError('');
+    setSuccessMessage('');
+
+    try {
+      const message = await register(username, email, password);
+      setSuccessMessage(message);
+      setTimeout(() => {
+        navigate('/login');  // Navigate to login page after successful signup
+      }, 2000);
+    } catch (error) {
+      setError(error.message);
+    }
   }
    
   return (
@@ -73,19 +88,24 @@ export default function SignupPage() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
             </div>
-          </div>        
+          </div>  
+
+          {successMessage && <div className="sm:col-span-full mx-5"><p className="text-lime-700 text-center mt-2">{successMessage}</p></div>} 
+          {error && <div className="sm:col-span-full mx-5"><p className="text-red-500 text-center mt-2">{error}</p></div>}
+
+          <div className="sm:col-span-full mt-6 flex items-center justify-center gap-x-6">        
+            <button
+              type="button"
+              onClick={handleSignup}
+              className="w-full sm:max-w-xs rounded-md bg-lime-600 sm:px-24 py-3 text-lg font-semibold text-amber-100 text-center shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
+            >
+              Submit
+            </button>
+          </div>
                 
-        </div>
-              
+        </div>              
       </div>
-      <div className="mt-16 flex items-center justify-center gap-x-6">        
-        <button
-          type="submit"
-          className="rounded-md bg-lime-600 px-24 py-3 text-lg font-semibold text-amber-100 shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-800"
-        >
-          Submit
-        </button>
-      </div>
+     
     </form>
   )
 }

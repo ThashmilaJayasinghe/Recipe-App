@@ -5,6 +5,8 @@ import Recipe from "../models/recipe.model.js";
 export const createRecipe = async (req, res) => {
   const recipe = req.body;
 
+  recipe.user = req.user.id;
+
   if(!recipe.title || !recipe.image || !recipe.ingredients || !recipe.instructions || !recipe.tags) {
     return res.status(400).json({ success: false, message: "Please provide all fields" });
   }
@@ -22,7 +24,7 @@ export const createRecipe = async (req, res) => {
 
 export const getAllRecipes = async (req, res) => {
   try {
-    const recipes = await Recipe.find({});
+    const recipes = await Recipe.find({ user: req.user.id });
     res.status(200).json({ success: true, data: recipes });
   } catch (error) {
     console.error(`Error in fetching recipes: ${error.message}`);

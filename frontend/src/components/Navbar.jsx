@@ -25,7 +25,7 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 import { logout } from "../services/AuthService.js";
 import recipe from "/recipeNav.svg";
 
-export default function Navbar() {
+export default function Navbar({ setLoggedIn }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ export default function Navbar() {
   const isLoggedIn = !!localStorage.getItem('token');
 
   function handleLogout() {
+    setLoggedIn(false);
     logout();
     navigate('/');
   };

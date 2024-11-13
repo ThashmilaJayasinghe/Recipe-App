@@ -14,6 +14,7 @@ import SignupPage from "./pages/SignupPage.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx"
 
 import { fetchRecipes, addRecipe, updateRecipe, deleteRecipe } from "./services/RecipeService.js";
+import { getAuthToken } from "./services/AuthService.js"
 
 
 
@@ -51,14 +52,20 @@ const initialRecipes = [
 
 function App() {
   const [recipes, setRecipes] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(!!getAuthToken());
 
   useEffect(() => {
-    fetchRecipes()
-      .then(data => setRecipes(data))
-      .catch(error => console.log(error))
-  }, []);
+    if (loggedIn) {
+      console.log(loggedIn)
+      fetchRecipes()
+        .then(data => setRecipes(data))
+        .catch(error => console.log(error));
 
+      console.log(recipes)
+    }
+  }, [loggedIn]);
 
+  
   function handleAddRecipe(newRecipe) {
     addRecipe(newRecipe)
       .then(data => setRecipes([
@@ -94,14 +101,14 @@ function App() {
 
   return (    
     <div className="bg-amber-50 min-h-screen">
-      {<Navbar />}
+      {<Navbar setLoggedIn={setLoggedIn} />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<ProtectedRoute><AddPage onAddRecipe={handleAddRecipe} /></ProtectedRoute>} />
         <Route path="/update" element={<ProtectedRoute><UpdatePage onUpdateRecipe={handleUpdateRecipe} /></ProtectedRoute>} />
         <Route path="/all" element={<ProtectedRoute><AllRecipesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} /></ProtectedRoute>} />
         <Route path="/favourites" element={<ProtectedRoute><FavouritesPage recipes={recipes} onDeleteRecipe={handleDeleteRecipe} /></ProtectedRoute>} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </div>
