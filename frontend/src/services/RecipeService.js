@@ -1,7 +1,12 @@
 import axios from "axios";
 import { getAuthToken } from './AuthService';
 
-const API_URL  = "http://localhost:5000/api/recipes";
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? '' // The backend and frontend are served from the same domain in production
+  : 'http://localhost:5000';
+
+const API_URL  = `${API_BASE_URL}/api/recipes`;
+
 
 export const fetchRecipes = async () => {
   const token = getAuthToken();
