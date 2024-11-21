@@ -91,14 +91,8 @@ Recipe-App/
 │   ├── config/
 │   │   └── db.js               # Contains MongoDB connection logic.              
 │   ├── controllers/            # Houses controllers for handling business logic
-│   │   └── recipe.controller.js  
-│   │   └── user.controller.js  
-│   ├── models/                 # Defines Mongoose models for the database
-│   │   └── recipe.model.js     
-│   │   └── user.model.js      
-│   ├── routes/                 # Contains route files for defining API endpoints
-│   │   └── recipe.routes.js     
-│   │   └── user.routes.js     
+│   ├── models/                 # Defines Mongoose models for the database 
+│   ├── routes/                 # Contains route files for defining API endpoints   
 │   ├── middleware/
 │   │   └── authMiddleware.js   # Protects routes using JWT authentication 
 │   └── server.js               # Entry point for the backend server
@@ -108,27 +102,16 @@ Recipe-App/
 │   ├── src/                    # Contains the core React app logic
 │   │   ├── assets/             # Stores static assets
 │   │   ├── components/
-│   │   │   └── ConfirmDeleteModal.jsx
-│   │   │   └── NavBar.jsx
-│   │   ├── pages/              # Contains React components for different pages
-│   │   │   └── AddPage.jsx      
-│   │   │   └── AllRecipesPage.jsx      
-│   │   │   └── FavouritesPage.jsx     
-│   │   │   └── HomePage.jsx  
-│   │   │   └── LoginPage.jsx 
-│   │   │   └── SignupPage.jsx   
-│   │   │   └── UpdatePage.jsx      
-│   │   ├── services/
-│   │   │   └── AuthService.js   # Handles authentication API calls
-│   │   │   └── RecipeService.js # Manages recipe-related API calls   
-│   │   ├── App.jsx              # Root component for the React app              
-│   │   ├── main.jsx             # Entry point for rendering the React app       
-│   │   ├── index.css            # Global styles for the app           
-│   │   ├── ProtectedRoute.jsx   # Protects routes from unauthorized access          
-│   ├── .gitignore               # Ignored files for Git
-│   ├── index.html               # Main HTML template where the React app is rendered
-│   ├── tailwind.config.js       # Configuration file for customizing Tailwind CSS.
-│   └── package.json             # Frontend metadata and dependencies   
+│   │   ├── pages/              # Contains React components for different pages   
+│   │   ├── services/           # Handles API calls  
+│   │   ├── App.jsx             # Root component for the React app              
+│   │   ├── main.jsx            # Entry point for rendering the React app       
+│   │   ├── index.css           # Global styles for the app           
+│   │   ├── ProtectedRoute.jsx  # Protects routes from unauthorized access          
+│   ├── .gitignore              # Ignored files for Git
+│   ├── index.html              # Main HTML template where the React app is rendered
+│   ├── tailwind.config.js      # Configuration file for customizing Tailwind CSS.
+│   └── package.json            # Frontend metadata and dependencies   
 │
 ├── .env                            
 ├── .gitignore                   # Ignored files for Git  
